@@ -19,26 +19,16 @@ def open_terminal(runtime):
     while time.time < start_time + runtime:
         time.sleep(1)
         keyboard.press('Win+R')
-        time.sleep(0.5)
-        keyboard.press('c')
-        time.sleep(0.5)
-        keyboard.press('m')
-        time.sleep(0.5)
-        keyboard.press('d')
-        time.sleep(0.5)
-        keyboard.press('.')
-        time.sleep(0.5)
-        keyboard.press('e')
-        time.sleep(0.5)
-        keyboard.press('x')
-        time.sleep(0.5)
-        keyboard.press('e')
+        cmd = 'cmd.exe'
+        for i in cmd:
+            time.sleep(0.5)
+            keyboard.press(i)
         time.sleep(0.5)
         keyboard.press('Enter')
 
 
 def press_space_at_random(runtime):
-    runtime = 200 if runtime < 200 else runtime
+    runtime = 11 if runtime < 11 else runtime
     start_time = time.time()
     while time.time < start_time + runtime:
         time.sleep(random.randrange(2, 10))
@@ -46,9 +36,12 @@ def press_space_at_random(runtime):
 
 
 def chaotic_mouse_movement(runtime):
-    runtime = 100 if runtime < 100 else runtime
+    runtime = 11 if runtime < 11 else runtime
     start_time = time.time()
     width, height = pyautogui.size()
     while time.time < start_time + runtime:
         time.sleep(random.randrange(2, 10))
         pyautogui.moveTo(random.randrange(width), random.randrange(height), duration=2.0)
+
+def close_current_tab():
+    keyboard.press("Ctrl+W")
