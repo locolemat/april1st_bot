@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-API_TOKEN = '172233586:AAF1EdyToa0DpWc3JNgDvfDQGXnrXKkFVxw'
+API_TOKEN = '6172233586:AAF1EdyToa0DpWc3JNgDvfDQGXnrXKkFVxw'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
@@ -30,5 +30,4 @@ async def asshack(message: types.message):
 
 
 if __name__ == '__main__':
-    executor.start_polling(dp)
-
+    executor.start_polling(dp, skip_updates=True)
