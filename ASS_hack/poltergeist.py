@@ -4,7 +4,47 @@ import pywhatkit
 import time
 import random
 import pyautogui
+import ctypes
+from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
+import requests
+from PIL import Image
+import pygame
 
+
+def play_sound(sound):
+    if sound == 'kurwa':
+        pygame.mixer.init()
+        pygame.mixer.music.load("kurwa.mp3")
+        pygame.mixer.music.play()
+
+
+def image_wallpaper(link):
+    id = link.split('/')[-1]
+    filename = f'image{id}.jpg'
+    response = requests.get(link)
+    with open(filename, "wb") as f:
+        f.write(response.content)
+    directory = os.path.dirname(os.path.realpath(__file__))
+    wallpaper_path = os.path.join(directory, filename)
+    os.system('REG ADD "HKCU\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "{}" /f'.format(wallpaper_path))
+    os.system('RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters')
+
+def image_download(link):
+    id = link.split('/')[-1]
+    filename = f'image{id}.jpg'
+    response = requests.get(link)
+    with open(filename, "wb") as f:
+        f.write(response.content)
+    image = Image.open(filename)
+    image.show()
+
+
+
+def change_volume(vol):
+    devices = AudioUtilities.GetSpeakers()
+    interface = devices.Activate(
+        ISimpleAudioVolume._iid_, ctypes.CLSCTX_ALL, None)
+    interface.SetMasterVolume(vol, None)
 
 def play_youtube_video(link, runtime):
     start_time = time.time()

